@@ -22,3 +22,28 @@ textarea{font:inherit;width:100%;border:1px solid #cbd4de;border-radius:7px;padd
  .receipt dl dd{display:block!important;margin:0 0 2mm!important;font-size:10pt!important;font-weight:700!important;color:#000!important;overflow-wrap:anywhere}
 }
 
+
+.credential-wrap{max-width:520px;margin:32px auto}.credential{width:85.6mm;height:54mm;padding:2.2mm;background:#fff;border:1px solid #1d2938;border-radius:3mm;display:flex;flex-direction:column;overflow:hidden;color:#172334}.credential-head{display:flex;align-items:center;gap:2mm;border-bottom:1px solid #dfe5ec;padding-bottom:1.3mm}.credential-logo{width:8mm;height:8mm;object-fit:contain}.credential-head strong{font-size:11pt;letter-spacing:.6px;display:block;line-height:1}.credential-head small{font-size:5.5pt;letter-spacing:.7px;color:#667386}.credential-content{display:grid;grid-template-columns:25mm minmax(0,1fr) 21mm;gap:1.5mm;align-items:center;flex:1;padding-top:1.5mm}.photo-slot{width:25mm;height:30mm;border:1px dashed #667386;display:flex;align-items:center;justify-content:center;text-align:center;color:#667386;font-size:6pt;line-height:1.3}.credential-data{min-width:0}.credential-data h1{font-size:8pt;line-height:1.15;margin:0 0 2mm;overflow-wrap:anywhere}.credential-data p{font-size:6pt;line-height:1.15;margin:0 0 1.3mm;overflow-wrap:anywhere}.credential-data b,.credential-data span{display:block}.credential-data b{font-size:5.5pt;text-transform:uppercase;color:#667386}.credential-qr svg{width:21mm;height:21mm;display:block;shape-rendering:crispEdges}.credential footer{border-top:1px solid #dfe5ec;padding-top:1mm;text-align:center;font-size:5.5pt;color:#667386}.credential-actions{margin-top:14px}
+@media print{
+ @page{size:90mm 58mm;margin:2mm}
+ html,body{width:86mm!important;min-width:0!important;margin:0!important;padding:0!important;background:#fff!important;color:#000!important;font:8pt/1.15 Arial,sans-serif!important}
+ .wrap,.credential-wrap{width:85.6mm!important;max-width:none!important;margin:0!important;padding:0!important}
+ .credential{width:85.6mm!important;height:54mm!important;border:1px solid #172334!important;border-radius:2mm!important;padding:2mm!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ .credential-actions{display:none!important}
+ .credential-data h1{font-size:8pt!important}
+ .credential-data p{font-size:6pt!important}
+ .top,.sidebar,.no-print{display:none!important}
+}
+/* Use separate physical page sizes for each print view. */
+.receipt{page:thermalReceipt}
+.credential{page:memberCard}
+@media print{
+ @page thermalReceipt{size:58mm 297mm;margin:2mm}
+ @page memberCard{size:90mm 58mm;margin:2mm}
+ html,body{width:auto!important;min-width:0!important;margin:0!important;padding:0!important;background:#fff!important;color:#000!important}
+ .wrap{width:auto!important;max-width:none!important;margin:0!important;padding:0!important}
+ .receipt{page:thermalReceipt;width:100%!important;max-width:none!important;margin:0!important;padding:1mm!important;border:0!important;background:#fff!important;color:#000!important;font:10pt/1.3 Arial,sans-serif!important;overflow-wrap:anywhere}
+ .credential{page:memberCard;width:85.6mm!important;height:54mm!important;border:1px solid #172334!important;border-radius:2mm!important;padding:2mm!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+}
+.receipt{position:relative;isolation:isolate;overflow:hidden}
+.receipt-watermark{position:absolute;z-index:-1;left:50%;top:50%;width:42mm;height:42mm;object-fit:contain;opacity:.35;transform:translate(-50%,-50%);pointer-events:none}

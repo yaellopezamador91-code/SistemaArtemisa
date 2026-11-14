@@ -18,7 +18,8 @@ Deja abierta la terminal mientras uses el sistema. Para detenerlo, presiona Ctrl
 - Panel adaptable a teléfono y computadora. Recepción ve las secciones de Asistencia, Alumnos y Cobros. La sección Administrador reúne las cuentas de recepción, tarifas, reportes semanales y asistencias/actividad.
 - Sesión recordada durante 30 días y persistida en la base de datos, incluso si el servidor se reinicia.
 - Alta y edición de alumnos con nombre, fecha de nacimiento, edad calculada, celular, contacto de emergencia, horario editable, fecha límite y modalidad de pago.
-- Al registrar un alumno se abre su QR. Puede imprimirse o descargarse como SVG para compartirlo. El QR no caduca automáticamente; permanece asociado al alumno y el acceso se valida con su estado y vigencia al escanearlo. Para mostrar el logotipo de la academia, guarda su archivo como `static/logo.png` o `static/logo.svg`.
+- Al registrar un alumno se abre su QR. Puede imprimirse o descargarse como SVG para compartirlo. El QR no caduca automáticamente; permanece asociado al alumno y el acceso se valida con su estado y vigencia al escanearlo. El logotipo incluido en `static/logo.png` aparece en el encabezado, la credencial y la pestaña del navegador.
+- Cada alumno tiene una credencial imprimible con espacio para fotografía infantil de 2.5 × 3 cm, nombre, horario, QR y contacto del tutor. El tutor usa el mismo nombre y teléfono capturados como contacto de emergencia; no se solicitan dos veces.
 - Alertas de pago, tolerancia de cuatro días y registro de intentos de acceso denegados.
 - Perfiles de administración y recepción. Ambos pueden editar datos de contacto, modalidad de pago y estado, incluida la baja.
 - Solo el administrador puede marcar una beca y establecer su porcentaje. En Cobros, la mensualidad muestra automáticamente el porcentaje y total con descuento antes de guardar; también queda reflejado en el recibo.
