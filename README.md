@@ -26,7 +26,7 @@ Deja abierta la terminal mientras uses el sistema. Para detenerlo, presiona Ctrl
 - Tarifas sugeridas editables por el administrador. La clase personalizada inicia en $300 MXN. El monto de cada cobro puede ajustarse al momento de registrarlo.
 - Cobros asociados a la cuenta que los registró, folio y recibo imprimible.
 - Los pagos por clase individual o fin de semana generan un pase de una entrada.
-- Resumen diario, historial de actividad y descarga semanal en Excel.
+- Resumen diario, historial de actividad y reportes Excel semanales, mensuales o completos. Cada archivo tiene pestañas separadas de asistencias y pagos.
 - Datos guardados en `atemisa.db` y conservados en las operaciones normales del sistema.
 
 ## Datos existentes
