@@ -242,7 +242,7 @@ class App(BaseHTTPRequestHandler):
    with connect() as c: s=c.execute('SELECT * FROM students WHERE id=?',(q,)).fetchone()
    if not s: return self.send('No encontrado',404)
    label,cls=access(s); body=f'<div class="panel" style="text-align:center"><h1>{esc(s["name"])}</h1>{qr_svg("AT"+s["qr"])}<p>Escanea este código para registrar asistencia.</p><p><span class="badge {cls}">{esc(label)}</span></p><button class="no-print" onclick="window.print()">Imprimir QR</button> <a class="btn secondary no-print" href="/qr.svg?id={s["id"]}">Descargar QR (SVG)</a> <a class="btn secondary no-print" href="/#alumnos">Volver a alumnos</a></div>'
-   body=body.replace('<a class="btn secondary no-print" href="/#alumnos">Volver a alumnos</a>',f'<a class="btn secondary no-print" href="/credential?id={s["id"]}" target="_blank">Credencial</a> <a class="btn secondary no-print" href="/#alumnos">Volver a alumnos</a>')
+   body=body.replace('<a class="btn secondary no-print" href="/#alumnos">Volver a alumnos</a>',f'<a class="btn secondary no-print" href="/credential?id={s["id"]}">Credencial</a> <a class="btn secondary no-print" href="/#alumnos">Volver a alumnos</a>')
    return self.send(self.page('Código QR',body,user))
   if path=='/credential':
    q=urllib.parse.parse_qs(route.query).get('id',[''])[0]
@@ -250,7 +250,7 @@ class App(BaseHTTPRequestHandler):
    if not s: return self.send('No encontrado',404)
    schedule=s['schedule'] or TRAINING_LABELS.get(s['training_days'],'Por definir')
    logo='<img class="credential-logo" src="/static/logo.png" alt="">' if (ROOT/'static/logo.png').exists() else ('<img class="credential-logo" src="/static/logo.svg" alt="">' if (ROOT/'static/logo.svg').exists() else '')
-   body=f'<div class="credential-wrap"><article class="credential"><header class="credential-head">{logo}<div><strong>ARTEMISA</strong><small>MUAY THAI · CREDENCIAL</small></div></header><div class="credential-content"><div class="photo-slot"><span>FOTO<br>INFANTIL<br>2.5 × 3 cm</span></div><div class="credential-data"><h1>{esc(s["name"])}</h1><p><b>Horario</b><span>{esc(schedule)}</span></p><p><b>Tutor</b><span>{esc(s["emergency_name"])}</span></p><p><b>Contacto del tutor</b><span>{esc(s["emergency_phone"])}</span></p></div><div class="credential-qr">{qr_svg("AT"+s["qr"])}</div></div><footer>Identificación de alumno · Presentar al ingresar</footer></article><div class="actions no-print credential-actions"><button onclick="window.print()">Imprimir credencial</button><a class="btn secondary" href="/qr?id={s["id"]}">Volver al QR</a></div></div>'
+   body=f'<div class="credential-wrap"><article class="credential"><header class="credential-head">{logo}<div><strong>ARTEMISA</strong><small>MUAY THAI · CREDENCIAL</small></div></header><div class="credential-content"><div class="photo-slot"><span>FOTO<br>INFANTIL<br>2.5 × 3 cm</span></div><div class="credential-data"><h1>{esc(s["name"])}</h1><p><b>Horario</b><span>{esc(schedule)}</span></p><p><b>Tutor</b><span>{esc(s["emergency_name"])}</span></p><p><b>Contacto del tutor</b><span>{esc(s["emergency_phone"])}</span></p></div><div class="credential-qr">{qr_svg("AT"+s["qr"])}</div></div><footer>Identificación de alumno · Presentar al ingresar</footer></article><div class="actions no-print credential-actions"><button onclick="window.print()">Imprimir credencial</button><a class="btn secondary" href="/qr?id={s["id"]}">Volver al QR</a> <a class="btn secondary" href="/#alumnos">Volver al panel</a></div></div>'
    return self.send(self.page('Credencial',body,user))
   if path=='/qr.svg':
    q=urllib.parse.parse_qs(route.query).get('id',[''])[0]
@@ -343,7 +343,7 @@ class App(BaseHTTPRequestHandler):
   if students:
    for s in students:
     label,kind=access(s); status=''
-    body+='<tr><td><strong>'+esc(s['name'])+'</strong><br><span class="muted">'+str(age_from_birth(s['birth_date']) if s['birth_date'] else s['age'])+' años · '+esc(s['payment_mode'])+' · '+esc(s['status'])+' · pases: '+str(s['class_credits'])+'</span></td><td>'+esc(s['phone'])+'<br><span class="muted">Emergencia: '+esc(s['emergency_name'])+' · '+esc(s['emergency_phone'])+'</span></td><td>'+esc(s['due'] or 'Sin fecha')+'</td><td><span class="badge '+kind+'">'+esc(label)+'</span></td><td><div class="actions"><a href="/qr?id='+str(s['id'])+'" target="_blank">Ver QR</a> <a href="/credential?id='+str(s['id'])+'" target="_blank">Credencial</a> <a href="/student?id='+str(s['id'])+'">Editar alumno</a>'+'</div></td></tr>'
+    body+='<tr><td><strong>'+esc(s['name'])+'</strong><br><span class="muted">'+str(age_from_birth(s['birth_date']) if s['birth_date'] else s['age'])+' años · '+esc(s['payment_mode'])+' · '+esc(s['status'])+' · pases: '+str(s['class_credits'])+'</span></td><td>'+esc(s['phone'])+'<br><span class="muted">Emergencia: '+esc(s['emergency_name'])+' · '+esc(s['emergency_phone'])+'</span></td><td>'+esc(s['due'] or 'Sin fecha')+'</td><td><span class="badge '+kind+'">'+esc(label)+'</span></td><td><div class="actions"><a href="/qr?id='+str(s['id'])+'">Ver QR</a> <a href="/credential?id='+str(s['id'])+'">Credencial</a> <a href="/student?id='+str(s['id'])+'">Editar alumno</a>'+'</div></td></tr>'
   else: body+='<tr><td colspan="5">Todavía no hay alumnos.</td></tr>'
   body+='</tbody></table></div></section>'
   if user['role']=='admin':
